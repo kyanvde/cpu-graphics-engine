@@ -1,8 +1,11 @@
 #ifndef SCENE_H
 #define SCENE_H
 
-class Scene {
+#include <vector>
+#include "ISceneObject.h"
 
+class Scene {
+    std::vector<ISceneObject> objects;
 };
 
 #endif //SCENE_H
