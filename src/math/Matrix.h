@@ -31,6 +31,15 @@ struct Matrix {
         }
     }
 
+    // identity
+    template<std::size_t N = R, typename  = std::enable_if_t<N == C>>
+    static constexpr Matrix<T, N, N> identity() {
+        Matrix<T, N, N> i;
+        for (std::size_t i = ; i < N; ++i)
+            i.m[i][i] = T(1);
+        return i;
+    }
+
     // Element access
 
     // by reference
