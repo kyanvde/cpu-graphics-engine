@@ -51,6 +51,11 @@ int main(int argc, char* argv[]) {
             }
 
             Scene scene = parser->parse(sceneFile);
+            Image image = scene.render();
+            std::string outputFileName = sceneFile.substr(0, sceneFile.find_last_of('.')) + ".bmp";
+            if (BMPWriter writer; !image.writeTo(outputFileName, writer)) {
+                std::cerr << "Error writing to file: " << outputFileName << std::endl;
+            }
         }
 
         return EXIT_SUCCESS;

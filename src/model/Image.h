@@ -13,6 +13,8 @@ class Image {
     std::vector<Color> bitmap;
 
 public:
+    Image(Color color = Color(255, 0, 0));
+
     Image(unsigned int width, unsigned int height, Color color = Color());
 
     bool writeTo(const std::string& filename, const ImageWriter& writer) const;

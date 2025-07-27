@@ -4,6 +4,12 @@
 
 #include "../io/output/ImageWriter.h"
 
+Image::Image(const Color color) {
+    this->width = 404;
+    this->height = 404;
+    this->bitmap = std::vector<Color>(this->width * this->height, color);
+}
+
 Image::Image(const unsigned int width, const unsigned int height, const Color color) {
     this->width = width;
     this->height = height;
