@@ -22,6 +22,17 @@ set(engine_sources
 )
 
 ############################################################
+# Add dependencies
+############################################################
+include(FetchContent)
+
+FetchContent_Declare(json
+        GIT_REPOSITORY https://github.com/nlohmann/json
+        GIT_TAG v3.12.0
+)
+FetchContent_MakeAvailable(json)
+
+############################################################
 # Create an executable
 ############################################################
 add_executable( "engine" ${engine_sources} )
