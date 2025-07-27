@@ -1,0 +1,6 @@
+Checks: >
+  google-*,
+  clang-analyzer-*,
+  performance-*,
+  readability-*
+WarningsAsErrors: '*'
