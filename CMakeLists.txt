@@ -14,9 +14,11 @@ set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} ${OWN_GXX_FLAGS}")
 # List all sources
 ############################################################
 set(engine_sources
-        src/engine.cpp
+        src/io/input/parsers/JsonSceneParser.cpp
+        src/io/output/writers/BMPWriter.cpp
+        src/model/Image.cpp
         src/model/Scene.cpp
-        src/parser/JsonSceneParser.cpp
+        src/engine.cpp
 )
 
 ############################################################

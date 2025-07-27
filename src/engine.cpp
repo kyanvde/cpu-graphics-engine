@@ -8,6 +8,8 @@
 
 #include "io/input/SceneParser.h"
 #include "io/input/parsers/JsonSceneParser.h"
+#include "io/output/writers/BMPWriter.h"
+#include "model/Image.h"
 
 using ParserFactory = std::function<std::unique_ptr<SceneParser>()>;
 
