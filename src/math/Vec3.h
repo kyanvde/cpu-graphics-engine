@@ -29,8 +29,11 @@ struct Vec3 {
     }
 
     Vec3 normalized() const {
-        return std::sqrt(x*x + y*y + z*z);
+        const float len = std::sqrt(x * x + y * y + z * z);
+        if (len == 0.0f) return {0, 0, 0};
+        return {x / len, y / len, z / len};
     }
+
 };
 
 #endif // VEC3_H
