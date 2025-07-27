@@ -1,17 +1,26 @@
 #ifndef COLOR_H
 #define COLOR_H
+
 #include <cstdint>
 
+#include "math/Vec3.h"
+
 struct Color {
-    uint8_t r, g, b;
+  uint8_t r, g, b;
 
-    Color() = default;
+  Color() = default;
 
-    Color(const uint8_t r, const uint8_t g, const uint8_t b) {
-        this->r = r;
-        this->g = g;
-        this->b = b;
-    }
+  Color(const uint8_t red, const uint8_t green, const uint8_t blue) {
+    this->r = red;
+    this->g = green;
+    this->b = blue;
+  }
+
+  explicit Color(const Vec3& vec3) {
+    this->r = static_cast<uint8_t>(vec3.x);
+    this->g = static_cast<uint8_t>(vec3.y);
+    this->b = static_cast<uint8_t>(vec3.z);
+  }
 };
 
-#endif //COLOR_H
+#endif  // COLOR_H

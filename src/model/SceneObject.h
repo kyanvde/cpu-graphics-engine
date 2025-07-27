@@ -1,10 +1,19 @@
 #ifndef SCENEOBJECT_H
 #define SCENEOBJECT_H
 
-#include "../math/Transform.h"
+#include "math/Transform.h"
 
 class SceneObject {
-    Transform transform;
+  Color color = {};
+  Transform transform;
+
+ protected:
+  SceneObject() = default;
+
+ public:
+  virtual ~SceneObject() = default;
+
+  virtual void render() = 0;
 };
 
-#endif //SCENEOBJECT_H
+#endif  // SCENEOBJECT_H

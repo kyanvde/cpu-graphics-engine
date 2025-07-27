@@ -4,9 +4,9 @@
 #include "Vec3.h"
 
 struct Transform {
-    Vec3 position = {0, 0, 0};
-    Vec3 rotation = {0, 0, 0};
-    Vec3 scale = {0, 0, 0};
+  Vec3 position = {0, 0, 0};
+  Vec3 rotation = {0, 0, 0};
+  Vec3 scale = {0, 0, 0};
 };
 
-#endif // TRANSFORM_H
+#endif  // TRANSFORM_H
