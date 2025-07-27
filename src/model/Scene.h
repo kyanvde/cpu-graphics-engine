@@ -2,10 +2,10 @@
 #define SCENE_H
 
 #include <vector>
-#include "ISceneObject.h"
+#include "SceneObject.h"
 
 class Scene {
-    std::vector<ISceneObject> objects;
+    std::vector<SceneObject> objects;
 };
 
 #endif //SCENE_H

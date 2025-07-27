@@ -6,12 +6,12 @@
 #include <string>
 #include <vector>
 
-#include "parser/ISceneParser.h"
-#include "parser/JsonSceneParser.h"
+#include "io/input/SceneParser.h"
+#include "io/input/parsers/JsonSceneParser.h"
 
-using ParserFactory = std::function<std::unique_ptr<ISceneParser>()>;
+using ParserFactory = std::function<std::unique_ptr<SceneParser>()>;
 
-std::unique_ptr<ISceneParser> createParserForSceneFile(const std::string& sceneFile) {
+std::unique_ptr<SceneParser> createParserForSceneFile(const std::string& sceneFile) {
     const std::string extension = std::filesystem::path(sceneFile).extension().string();
 
     if (extension == ".json") return std::make_unique<JsonSceneParser>();
@@ -42,7 +42,7 @@ int main(int argc, char* argv[]) {
 
         // Render each scene
         for (const std::string& sceneFile : args) {
-            std::unique_ptr<ISceneParser> parser = createParserForSceneFile(sceneFile);
+            std::unique_ptr<SceneParser> parser = createParserForSceneFile(sceneFile);
             if (!parser) {
                 std::cerr << "Skipping file: " << sceneFile << std::endl;
                 continue;
