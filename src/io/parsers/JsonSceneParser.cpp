@@ -37,7 +37,7 @@ Scene JsonSceneParser::parse(const std::string& sceneFile) {
     scene.addObject(lineDrawingParser.parse(objectJson));
   }
 
-  return {};
+  return scene;
 }
 
 unsigned int JsonSceneParser::getUnsigned(const json& json,

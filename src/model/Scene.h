@@ -17,7 +17,7 @@ class Scene {
   std::vector<std::unique_ptr<SceneObject>> objects;
 
  public:
-  Image render();
+  Image render() const;
 
   void setMaxImageSize(unsigned int maxImageSize);
 

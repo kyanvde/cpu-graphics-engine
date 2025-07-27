@@ -1,6 +1,21 @@
 #include "Scene.h"
 
-Image Scene::render() { return Image(); }
+#include <iostream>
+
+Image Scene::render() const {
+  std::vector<Line> lines;
+  for (const std::unique_ptr<SceneObject>& object : objects) {
+    const std::vector<Line>& objLines = object->getProjectedLines();
+    lines.insert(lines.end(), objLines.begin(), objLines.end());
+  }
+
+  Image image(lines, backgroundColor, maxImageSize);
+  for (const std::unique_ptr<SceneObject>& object : objects) {
+    object->render(image);
+  }
+
+  return image;
+}
 
 void Scene::setMaxImageSize(const unsigned int maxImageSize) {
   this->maxImageSize = maxImageSize;

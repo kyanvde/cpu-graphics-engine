@@ -3,6 +3,7 @@
 
 #include <vector>
 
+#include "model/Image.h"
 #include "model/Line.h"
 #include "model/SceneObject.h"
 
@@ -10,9 +11,10 @@ class LineDrawing final : public SceneObject {
   std::vector<Line> lines;
 
  public:
-  void render() override;
+  std::vector<Line> getProjectedLines() override;
+  void render(Image& image) override;
 
-  void setLines(const std::vector<Line>& lines) { this->lines = lines; }
+  void setLines(std::vector<Line>&& lines) { this->lines = std::move(lines); }
 };
 
 #endif  // LINEDRAWING_H

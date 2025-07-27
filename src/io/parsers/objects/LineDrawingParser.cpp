@@ -37,8 +37,10 @@ std::unique_ptr<SceneObject> LineDrawingParser::parse(
 
     lines.emplace_back(points[lineJson[0].get<unsigned int>()],
                        points[lineJson[1].get<unsigned int>()]);
-
-    lineDrawing.setLines(lines);
   }
+
+  lineDrawing.setLines(std::move(lines));
+  lineDrawing.setColor(Color(JsonSceneParser::getVec3(json["color"])));
+
   return std::make_unique<LineDrawing>(std::move(lineDrawing));
 }
