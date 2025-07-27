@@ -36,3 +36,7 @@ FetchContent_MakeAvailable(json)
 # Create an executable
 ############################################################
 add_executable( "engine" ${engine_sources} )
+
+target_include_directories(engine PRIVATE ${CMAKE_SOURCE_DIR}/src)
+
+target_link_libraries("engine" PRIVATE nlohmann_json::nlohmann_json)
