@@ -2,6 +2,7 @@
 #define SCENEOBJECT_H
 
 #include "math/Transform.h"
+#include "model/Color.h"
 
 class SceneObject {
   Color color = {};

@@ -12,6 +12,7 @@ class JsonSceneParser final : public SceneParser {
   static unsigned int getUnsigned(const nlohmann::json& json,
                                   const std::string& key);
   static Vec3 getVec3(const nlohmann::json& json, const std::string& key);
+  static Vec3 getVec3(const nlohmann::json& array);
 };
 
 #endif  // JSONSCENEPARSER_H

@@ -12,6 +12,6 @@ void Scene::setBackgroundColor(const Color& backgroundColor) {
 
 void Scene::setCamera(const Vec3& camera) { this->camera = camera; }
 
-void Scene::addObject(const SceneObject& object) {
-  this->objects.push_back(object);
+void Scene::addObject(std::unique_ptr<SceneObject> object) {
+  this->objects.push_back(std::move(object));
 }

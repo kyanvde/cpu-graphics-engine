@@ -2,6 +2,8 @@
 
 #include <fstream>
 
+#include "objects/LineDrawingParser.h"
+
 using json = nlohmann::json;
 
 Scene JsonSceneParser::parse(const std::string& sceneFile) {
@@ -28,6 +30,11 @@ Scene JsonSceneParser::parse(const std::string& sceneFile) {
   // Parse objects
   if (!json.contains("objects") || !json["objects"].is_array()) {
     throw std::runtime_error("sceneFile needs to specify an array of objects");
+  }
+
+  for (const auto& objectJson : json["objects"]) {
+    LineDrawingParser lineDrawingParser;
+    scene.addObject(lineDrawingParser.parse(objectJson));
   }
 
   return {};
@@ -63,4 +70,18 @@ Vec3 JsonSceneParser::getVec3(const nlohmann::json& json,
   }
 
   return {arr[0].get<float>(), arr[1].get<float>(), arr[2].get<float>()};
+}
+
+Vec3 JsonSceneParser::getVec3(const nlohmann::json& array) {
+  if (!array.is_array() || array.size() != 3) {
+    throw std::runtime_error("Expected array of 3 floats");
+  }
+
+  for (const auto& val : array) {
+    if (!val.is_number()) {
+      throw std::runtime_error("All elements of Vec3 must be numbers");
+    }
+  }
+
+  return {array[0].get<float>(), array[1].get<float>(), array[2].get<float>()};
 }

@@ -1,6 +1,7 @@
 #ifndef SCENE_H
 #define SCENE_H
 
+#include <memory>
 #include <vector>
 
 #include "Image.h"
@@ -11,9 +12,9 @@ class Scene {
 
   Color backgroundColor = {};
 
-  Vec3 camera;
+  Vec3 camera = {};
 
-  std::vector<SceneObject> objects;
+  std::vector<std::unique_ptr<SceneObject>> objects;
 
  public:
   Image render();
@@ -24,7 +25,7 @@ class Scene {
 
   void setCamera(const Vec3& camera);
 
-  void addObject(const SceneObject& object);
+  void addObject(std::unique_ptr<SceneObject> object);
 };
 
 #endif  // SCENE_H
