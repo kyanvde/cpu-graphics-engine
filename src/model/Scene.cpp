@@ -34,6 +34,6 @@ void Scene::addObject(std::unique_ptr<SceneObject> object) {
 unsigned int Scene::getMaxImageSize() const { return maxImageSize; }
 Color Scene::getBackgroundColor() const { return backgroundColor; }
 Vec3 Scene::getCamera() const { return camera; }
-const std::vector<std::unique_ptr<SceneObject>>& Scene::getObjects() {
+const std::vector<std::unique_ptr<SceneObject>>& Scene::getObjects() const {
   return objects;
 }
