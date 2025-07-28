@@ -35,14 +35,3 @@ jobs:
           lcov --capture --directory . --output-file coverage.info
           lcov --remove coverage.info '/usr/*' '*/_deps/*' --output-file coverage.info
           lcov --list coverage.info
-
-      - name: Create coverage badge
-        uses: tj-actions/coverage-badge@v2.8
-        with:
-          coverage-file: build/coverage.info
-
-      - name: Upload badge
-        uses: actions/upload-artifact@v4
-        with:
-          name: coverage-badge
-          path: .github/badges/coverage.svg
