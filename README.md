@@ -3,6 +3,7 @@
 A simple CPU-based graphics engine written in C++.
 
 [![CI](https://github.com/kyanvde/cpu-graphics-engine/actions/workflows/ci.yml/badge.svg)](https://github.com/kyanvde/cpu-graphics-engine/actions/workflows/ci.yml)
+[![CD](https://github.com/kyanvde/cpu-graphics-engine/actions/workflows/cd.yml/badge.svg)](https://github.com/kyanvde/cpu-graphics-engine/actions/workflows/cd.yml)
 [![codecov](https://codecov.io/github/kyanvde/cpu-graphics-engine/graph/badge.svg?token=HL1ILHMB39)](https://codecov.io/github/kyanvde/cpu-graphics-engine)
 ![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)
 ![C++](https://img.shields.io/badge/language-C++17-blue.svg)
@@ -89,7 +90,8 @@ To run the tests after building:
 
 ## Documentation
 
-[Documentation](https://kyanvde.github.io/cpu-graphics-engine/index.html) is generated using Doxygen. To build the documentation, run:
+[Documentation](https://kyanvde.github.io/cpu-graphics-engine/index.html) is generated using Doxygen. To build the
+documentation, run:
 
 ```sh
 doxygen Doxyfile
