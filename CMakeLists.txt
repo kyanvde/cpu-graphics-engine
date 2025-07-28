@@ -23,9 +23,11 @@ set(engine_sources
         src/model/objects/LSystem2D.cpp
         src/model/Image.cpp
         src/model/Scene.cpp
-        src/engine.cpp
 )
 
+set(test_sources
+        tests/MathUtilsTest.cpp
+)
 ############################################################
 # Add dependencies
 ############################################################
@@ -37,11 +39,19 @@ FetchContent_Declare(json
 )
 FetchContent_MakeAvailable(json)
 
-############################################################
-# Create an executable
-############################################################
-add_executable("engine" ${engine_sources})
+FetchContent_Declare(googletest
+        GIT_REPOSITORY https://github.com/google/googletest.git
+        GIT_TAG v1.17.0
+)
+FetchContent_MakeAvailable(googletest)
 
+############################################################
+# Create executables
+############################################################
+add_executable(engine src/engine.cpp ${engine_sources})
 target_include_directories(engine PRIVATE ${CMAKE_SOURCE_DIR}/src)
+target_link_libraries(engine PRIVATE nlohmann_json::nlohmann_json)
 
-target_link_libraries("engine" PRIVATE nlohmann_json::nlohmann_json)
+add_executable(engine_tests ${engine_sources} ${test_sources})
+target_include_directories(engine_tests PRIVATE ${CMAKE_SOURCE_DIR}/src)
+target_link_libraries(engine_tests PRIVATE nlohmann_json::nlohmann_json gtest_main)
