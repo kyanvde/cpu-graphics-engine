@@ -28,6 +28,7 @@ set(engine_sources
 set(test_sources
         tests/MathUtilsTest.cpp
         tests/Vec3Test.cpp
+        tests/ProjectorTest.cpp
 )
 ############################################################
 # Add dependencies
