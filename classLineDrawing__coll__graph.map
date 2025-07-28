@@ -1,0 +1,5 @@
+<map id="LineDrawing" name="LineDrawing">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,219,160,324"/>
+<area shape="rect" id="Node000002" href="$classSceneObject.html" title=" " alt="" coords="5,5,160,171"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="85,184,85,219,80,219,80,184"/>
+</map>
