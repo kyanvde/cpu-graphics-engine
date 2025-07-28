@@ -5,7 +5,7 @@
 
 class Projector {
  public:
-  static Vec3 projectPoint(const Vec3& point, double d);
+  static Vec3 projectPoint(const Vec3& point, double focalLength);
 };
 
 #endif  // PROJECTOR_H

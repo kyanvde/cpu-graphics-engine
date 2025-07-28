@@ -1,7 +1,5 @@
 #include "LineDrawing.h"
 
-#include <iostream>
-
 #include "math/Projector.h"
 
 std::vector<Line> LineDrawing::getProjectedLines() {
