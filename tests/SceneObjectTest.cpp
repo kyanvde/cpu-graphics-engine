@@ -30,14 +30,13 @@ TEST(SceneObjectTest, DefaultConstructor) {
 }
 
 TEST(SceneObjectTest, Destructor) {
-  const TestSceneObject* obj = new TestSceneObject();
-  EXPECT_NO_THROW(delete obj);
+  auto obj = std::make_unique<const TestSceneObject>();
+  EXPECT_NO_THROW(obj.reset());
 }
 
 TEST(SceneObjectTest, Inheritance) {
-  SceneObject* obj = new TestSceneObject();
+  const std::unique_ptr<SceneObject> obj = std::make_unique<TestSceneObject>();
   EXPECT_NO_THROW(obj->getProjectedLines());
   Image image;
   EXPECT_NO_THROW(obj->render(image));
-  delete obj;
 }
