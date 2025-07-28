@@ -15,6 +15,10 @@ struct Vec3 {
     return {x + other.x, y + other.y, z + other.z};
   }
 
+  Vec3 operator-(const Vec3& other) const {
+    return {x - other.x, y - other.y, z - other.z};
+  }
+
   Vec3 operator*(const double scalar) const {
     return {x * scalar, y * scalar, z * scalar};
   }
@@ -28,7 +32,7 @@ struct Vec3 {
             (x * other.y) - (y * other.x)};
   }
 
-  Vec3 normalized() const {
+  Vec3 normalize() const {
     const double len = std::sqrt((x * x) + (y * y) + (z * z));
     if (len == 0.0F) {
       return {0, 0, 0};
