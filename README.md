@@ -2,9 +2,9 @@
 
 A simple CPU-based graphics engine written in C++.
 
+[![CI](https://github.com/kyanvde/cpu-graphics-engine/actions/workflows/ci.yml/badge.svg)](https://github.com/kyanvde/cpu-graphics-engine/actions/workflows/ci.yml)
+[![Coverage](https://coveralls.io/repos/github/kyanvde/cpu-graphics-engine/badge.svg?branch=main)](https://coveralls.io/github/kyanvde/cpu-graphics-engine?branch=main)
 ![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)
-![Build](https://img.shields.io/github/actions/workflow/status/kyanvde/cpu-graphics-engine/ci.yml?branch=main)
-![Coverage](https://github.com/kyanvde/cpu-graphics-engine/blob/main/.github/badges/coverage.svg)
 ![C++](https://img.shields.io/badge/language-C++17-blue.svg)
 ![Docs](https://img.shields.io/badge/docs-Doxygen-blue.svg)
 
