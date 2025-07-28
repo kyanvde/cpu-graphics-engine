@@ -2,6 +2,7 @@
 
 #include <fstream>
 
+#include "objects/LSystem2DParser.h"
 #include "objects/LineDrawingParser.h"
 
 using json = nlohmann::json;
@@ -33,8 +34,13 @@ Scene JsonSceneParser::parse(const std::string& sceneFile) {
   }
 
   for (const auto& objectJson : json["objects"]) {
-    LineDrawingParser lineDrawingParser;
-    scene.addObject(lineDrawingParser.parse(objectJson));
+    if (objectJson["type"] == "LineDrawing") {
+      LineDrawingParser lineDrawingParser;
+      scene.addObject(lineDrawingParser.parse(objectJson));
+    } else if (objectJson["type"] == "LSystem2D") {
+      LSystem2DParser lSystem2DParser;
+      scene.addObject(lSystem2DParser.parse(objectJson));
+    }
   }
 
   return scene;
@@ -84,4 +90,25 @@ Vec3 JsonSceneParser::getVec3(const nlohmann::json& array) {
   }
 
   return {array[0].get<float>(), array[1].get<float>(), array[2].get<float>()};
+}
+
+float JsonSceneParser::getFloat(const json& json, const std::string& key) {
+  if (!json.contains(key)) {
+    throw std::runtime_error("Missing key: " + key);
+  }
+  if (!json[key].is_number()) {
+    throw std::runtime_error("Field '" + key + "' must be a number.");
+  }
+  return json[key].get<float>();
+}
+
+std::string JsonSceneParser::getRequiredString(const json& json,
+                                               const std::string& key) {
+  if (!json.contains(key)) {
+    throw std::runtime_error("Missing key: " + key);
+  }
+  if (!json[key].is_string()) {
+    throw std::runtime_error("Field '" + key + "' must be a string.");
+  }
+  return json[key].get<std::string>();
 }

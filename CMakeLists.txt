@@ -15,6 +15,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${OWN_GXX_FLAGS}")
 ############################################################
 set(engine_sources
         src/io/parsers/objects/LineDrawingParser.cpp
+        src/io/parsers/objects/LSystem2DParser.cpp
         src/io/parsers/JsonSceneParser.cpp
         src/io/writers/BMPWriter.cpp
         src/math/Projector.cpp

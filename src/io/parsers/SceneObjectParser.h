@@ -11,7 +11,8 @@ class SceneObjectParser {
   SceneObjectParser() = default;
 
  public:
-  virtual std::unique_ptr<SceneObject> parse(const nlohmann::json& j) const = 0;
+  virtual std::unique_ptr<SceneObject> parse(
+      const nlohmann::json& json) const = 0;
   virtual ~SceneObjectParser() = default;
 };
 
