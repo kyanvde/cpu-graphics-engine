@@ -20,8 +20,7 @@ jobs:
     - name: Install gcov and cpp-coveralls
       run: |
         sudo apt-get update
-        sudo apt-get install -y lcov gcovr
-        pip install --user cpp-coveralls
+        sudo apt-get install -y lcov
 
     # Configure CMake with coverage flags
     - name: Configure CMake (with coverage)
@@ -41,7 +40,9 @@ jobs:
     - name: Generate coverage files
       working-directory: ${{github.workspace}}/build
       run: |
-        find . -name '*.gcno' -exec gcov {} +
+        lcov --capture --directory . --output-file coverage.info && lcov --remove coverage.info '/usr/*' --output-file coverage.info && lcov --list coverage.info && bash <(curl -s https://codecov.io/bash) -f coverage.info || echo "Codecov did not collect coverage reports"
+
+
 
     # Upload coverage to Coveralls
     - name: Upload coverage to Coveralls
