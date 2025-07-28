@@ -89,7 +89,7 @@ To run the tests after building:
 
 ## Documentation
 
-Documentation is generated using Doxygen. To build the documentation, run:
+[Documentation](https://kyanvde.github.io/cpu-graphics-engine/index.html) is generated using Doxygen. To build the documentation, run:
 
 ```sh
 doxygen Doxyfile
