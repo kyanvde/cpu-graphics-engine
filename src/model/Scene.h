@@ -26,6 +26,11 @@ class Scene {
   void setCamera(const Vec3& camera);
 
   void addObject(std::unique_ptr<SceneObject> object);
+
+  unsigned int getMaxImageSize() const;
+  Color getBackgroundColor() const;
+  Vec3 getCamera() const;
+  const std::vector<std::unique_ptr<SceneObject>>& getObjects() const;
 };
 
 #endif  // SCENE_H

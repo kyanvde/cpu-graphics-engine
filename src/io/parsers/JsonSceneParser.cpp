@@ -58,9 +58,6 @@ Scene JsonSceneParser::parse(const std::string& sceneFile) {
     scene.addObject(parseObject(objectJson));
   }
 
- private:
-  std::unique_ptr<SceneObject> parseObject(const nlohmann::json& objectJson);
-
   return scene;
 }
 
