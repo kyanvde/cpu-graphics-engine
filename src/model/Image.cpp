@@ -66,14 +66,14 @@ Image::Image(const std::vector<Line>& lines, const Color& backgroundColor,
       imageHeight = 1;
     }
   }
-
-  scaleFactor = 0.95 * (imageWidth / xRange);
+  constexpr double scaleMultiplier = 0.95;
+  scaleFactor = scaleMultiplier * (imageWidth / xRange);
 
   const double centerX = scaleFactor * ((minX + maxX) / 2);
   const double centerY = scaleFactor * ((minY + maxY) / 2);
 
-  moveX = (imageWidth / 2) - centerX;
-  moveY = (imageHeight / 2) - centerY;
+  moveX = static_cast<int>(imageWidth / 2) - centerX;
+  moveY = static_cast<int>(imageHeight / 2) - centerY;
 
   this->width = imageWidth;
   this->height = imageHeight;
@@ -92,57 +92,48 @@ void Image::clear(const Color color) {
 }
 
 void Image::drawLine(const Line& line, const Color& color) {
-  int x0 = static_cast<int>(std::round(line.from.x));
-  int y0 = static_cast<int>(std::round(line.from.y));
-  int x1 = static_cast<int>(std::round(line.to.x));
-  int y1 = static_cast<int>(std::round(line.to.y));
+  int x0Coord = static_cast<int>(std::round(line.from.x));
+  int y0Coord = static_cast<int>(std::round(line.from.y));
+  int x1Coord = static_cast<int>(std::round(line.to.x));
+  int y1Coord = static_cast<int>(std::round(line.to.y));
 
   // Clamp to image bounds
-  x0 = std::clamp(x0, 0, static_cast<int>(width) - 1);
-  y0 = std::clamp(y0, 0, static_cast<int>(height) - 1);
-  x1 = std::clamp(x1, 0, static_cast<int>(width) - 1);
-  y1 = std::clamp(y1, 0, static_cast<int>(height) - 1);
+  x0Coord = std::clamp(x0Coord, 0, static_cast<int>(width) - 1);
+  y0Coord = std::clamp(y0Coord, 0, static_cast<int>(height) - 1);
+  x1Coord = std::clamp(x1Coord, 0, static_cast<int>(width) - 1);
+  y1Coord = std::clamp(y1Coord, 0, static_cast<int>(height) - 1);
 
-  if (x0 >= this->width || y0 >= this->height || x1 >= this->width ||
-      y1 > this->height) {
-    std::stringstream ss;
-    ss << "Drawing line from (" << x0 << "," << y0 << ") to (" << x1 << ","
-       << y1 << ") in image of width " << this->width << " and height "
-       << this->height;
-    throw std::runtime_error(ss.str());
-  }
-  if ((x0 > x1) || ((x0 == x1) && (y0 > y1))) {
-    // Ensure p0->p1 goes from left to right (or from bottom to top if perfectly
-    // vertical)
-    std::swap(x0, x1);
-    std::swap(y0, y1);
+  const bool steep = abs(y1Coord - y0Coord) > abs(x1Coord - x0Coord);
+
+  // Swap x and y if the line is steep
+  if (steep) {
+    std::swap(x0Coord, y0Coord);
+    std::swap(x1Coord, y1Coord);
   }
 
-  if (x0 == x1) {
-    // Special case for vertical line
-    for (int px = 0; px <= (y1 - y0); px++) {
-      (*this)(x0, y0 + px) = color;
+  // Make sure we draw from left to right
+  if (x0Coord > x1Coord) {
+    std::swap(x0Coord, x1Coord);
+    std::swap(y0Coord, y1Coord);
+  }
+
+  const int deltaX = x1Coord - x0Coord;
+  const int deltaY = abs(y1Coord - y0Coord);
+  int error = deltaX / 2;
+  const int yStep = (y0Coord < y1Coord) ? 1 : -1;
+
+  int y = y0Coord;
+  for (int xCoord = x0Coord; xCoord <= x1Coord; ++xCoord) {
+    if (steep) {
+      (*this)(y, xCoord) = color;  // if steep, swap back
+    } else {
+      (*this)(xCoord, y) = color;
     }
-  } else if (y0 == y1) {
-    // Special case for horizontal line
-    for (int px = 0; px <= (x1 - x0); px++) {
-      (*this)(x0 + px, y0) = color;
-    }
-  } else {
-    // Diagonal line, 3 cases depending on slope
-    double m = ((double)y1 - (double)y0) / ((double)x1 - (double)x0);
-    if (-1.0 <= m && m <= 1.0) {
-      for (int px = 0; px <= x1 - x0; px++) {
-        (*this)(x0 + px, (unsigned int)round(y0 + m * px)) = color;
-      }
-    } else if (m > 1.0) {
-      for (int px = 0; px <= y1 - y0; px++) {
-        (*this)((unsigned int)round(x0 + (px / m)), y0 + px) = color;
-      }
-    } else if (m < -1.0) {
-      for (int px = 0; px <= y0 - y1; px++) {
-        (*this)((unsigned int)round(x0 - (px / m)), y0 - px) = color;
-      }
+
+    error -= deltaY;
+    if (error < 0) {
+      y += yStep;
+      error += deltaX;
     }
   }
 }

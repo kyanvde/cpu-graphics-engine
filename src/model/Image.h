@@ -1,7 +1,6 @@
 #ifndef IMAGE_H
 #define IMAGE_H
 
-#include <iosfwd>
 #include <string>
 #include <vector>
 
@@ -16,7 +15,9 @@ class Image {
   unsigned int width, height;
   std::vector<Color> bitmap;
 
-  double scaleFactor, moveX, moveY;
+  double scaleFactor = 1;
+  double moveX{};
+  double moveY{};
 
  public:
   explicit Image(Color color = ERROR_COLOR);

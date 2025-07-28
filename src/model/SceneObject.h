@@ -8,7 +8,7 @@
 class Image;
 
 class SceneObject {
-  Color color = {0, 0, 255};
+  Color color = {};
   Transform transform;
 
  protected:
