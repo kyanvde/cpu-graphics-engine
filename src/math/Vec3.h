@@ -4,18 +4,18 @@
 #include <cmath>
 
 struct Vec3 {
-  float x, y, z;
+  double x, y, z;
 
   Vec3() = default;
 
-  Vec3(const float xCoord, const float yCoord, const float zCoord)
+  Vec3(const double xCoord, const double yCoord, const double zCoord)
       : x(xCoord), y(yCoord), z(zCoord) {}
 
   Vec3 operator+(const Vec3& other) const {
     return {x + other.x, y + other.y, z + other.z};
   }
 
-  Vec3 operator*(const float scalar) const {
+  Vec3 operator*(const double scalar) const {
     return {x * scalar, y * scalar, z * scalar};
   }
 
@@ -29,7 +29,7 @@ struct Vec3 {
   }
 
   Vec3 normalized() const {
-    const float len = std::sqrt((x * x) + (y * y) + (z * z));
+    const double len = std::sqrt((x * x) + (y * y) + (z * z));
     if (len == 0.0F) {
       return {0, 0, 0};
     }
