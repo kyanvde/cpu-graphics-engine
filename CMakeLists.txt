@@ -62,4 +62,5 @@ target_include_directories(engine_tests PRIVATE ${CMAKE_SOURCE_DIR}/src)
 target_link_libraries(engine_tests PRIVATE nlohmann_json::nlohmann_json gtest_main)
 
 enable_testing()
-add_test(NAME EngineTests COMMAND engine_tests)
+include(GoogleTest)
+gtest_discover_tests(engine_tests)
