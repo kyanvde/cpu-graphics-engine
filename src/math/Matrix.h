@@ -56,7 +56,7 @@ struct Matrix {
 
   // multiplication
   template <std::size_t K>
-  constexpr Matrix<T, R, C> operator*(Matrix<T, C, K> const& other) const {
+  constexpr Matrix<T, R, K> operator*(Matrix<T, C, K> const& other) const {
     Matrix<T, R, K> result;
     for (std::size_t i = 0; i < R; ++i) {
       for (std::size_t k = 0; k < K; ++k) {
