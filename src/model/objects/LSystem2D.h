@@ -13,7 +13,7 @@ class LSystem2D final : public SceneObject {
   std::string initiator;
   double angle = 0;
   double startingAngle = 0;
-  unsigned int iterations = 1;
+  unsigned int nrIterations = 1;
 
  public:
   std::vector<Line> getProjectedLines() override;

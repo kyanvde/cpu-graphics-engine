@@ -18,8 +18,8 @@ void LineDrawing::render(Image& image) {
     line.from = line.from * image.getScaleFactor();
     line.to = line.to * image.getScaleFactor();
 
-    line.from = line.from + Vec3(image.getMoveX(), image.getMoveY(), 0);
-    line.to = line.to + Vec3(image.getMoveX(), image.getMoveY(), 0);
+    line.from = line.from + Vec3(image.getMoveX(), image.getMoveY(), 10);
+    line.to = line.to + Vec3(image.getMoveX(), image.getMoveY(), 10);
 
     image.drawLine(line, getColor());
   }

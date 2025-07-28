@@ -52,6 +52,7 @@ std::unique_ptr<SceneObject> LSystem2DParser::parse(
   lSystem.setAngle(JsonSceneParser::getFloat(json, "angle"));
   lSystem.setStartingAngle(JsonSceneParser::getFloat(json, "startingAngle"));
   lSystem.setIterations(JsonSceneParser::getUnsigned(json, "iterations"));
+  lSystem.setColor(Color(JsonSceneParser::getVec3(json["color"])));
 
   return std::make_unique<LSystem2D>(std::move(lSystem));
 }
