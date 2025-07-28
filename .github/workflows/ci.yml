@@ -36,18 +36,7 @@ jobs:
       working-directory: ${{github.workspace}}/build
       run: ctest -C ${{env.BUILD_TYPE}}
 
-    # Generate coverage data (gcov files)
-    - name: Generate coverage files
-      working-directory: ${{github.workspace}}/build
-      run: |
-        lcov --capture --directory . --output-file coverage.info && lcov --remove coverage.info '/usr/*' --output-file coverage.info && lcov --list coverage.info && bash <(curl -s https://codecov.io/bash) -f coverage.info || echo "Codecov did not collect coverage reports"
-
-
-
-    # Upload coverage to Coveralls
-    - name: Upload coverage to Coveralls
-      env:
-        COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
-      working-directory: ${{github.workspace}}/build
-      run: |
-        ~/.local/bin/coveralls --include src --gcov-options '\-lp'
+    - name: Upload coverage reports to Codecov
+      uses: codecov/codecov-action@v5
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
