@@ -41,7 +41,7 @@ TEST(Vec3Test, Addition) {
   EXPECT_FLOAT_EQ(result2.z, -0.1);
 }
 
-TEST(Vec3Test, Substraction) {
+TEST(Vec3Test, Subtraction) {
   const Vec3 vector1{5.0, 7.0, 9.0};
   const Vec3 vector2{1.0, 2.0, 3.0};
   const Vec3 result = vector1 - vector2;
