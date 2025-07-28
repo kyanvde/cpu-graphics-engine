@@ -16,8 +16,19 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    - name: Configure CMake
-      run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
+    # Install coverage tools and cpp-coveralls
+    - name: Install gcov and cpp-coveralls
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y lcov gcovr
+        pip install --user cpp-coveralls
+
+    # Configure CMake with coverage flags
+    - name: Configure CMake (with coverage)
+      run: |
+        cmake -B ${{github.workspace}}/build \
+          -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} \
+          -DCMAKE_CXX_FLAGS="--coverage" -DCMAKE_C_FLAGS="--coverage"
 
     - name: Build
       run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}}
@@ -26,3 +37,16 @@ jobs:
       working-directory: ${{github.workspace}}/build
       run: ctest -C ${{env.BUILD_TYPE}}
 
+    # Generate coverage data (gcov files)
+    - name: Generate coverage files
+      working-directory: ${{github.workspace}}/build
+      run: |
+        find . -name '*.gcno' -exec gcov {} +
+
+    # Upload coverage to Coveralls
+    - name: Upload coverage to Coveralls
+      env:
+        COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
+      working-directory: ${{github.workspace}}/build
+      run: |
+        ~/.local/bin/coveralls --exclude tests --exclude lib --gcov-options '\-lp'
