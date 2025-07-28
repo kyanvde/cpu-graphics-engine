@@ -16,6 +16,15 @@ TEST(Vec3Test, ParameterizedConstructor) {
   EXPECT_FLOAT_EQ(vector.z, 3.0);
 }
 
+TEST(Vec3Test, EqualityOperator) {
+  const Vec3 vector1{1.0, 2.0, 3.0};
+  const Vec3 vector2{1.0, 2.0, 3.0};
+  const Vec3 vector3{4.0, 5.0, 6.0};
+
+  EXPECT_TRUE(vector1 == vector2);
+  EXPECT_FALSE(vector1 == vector3);
+}
+
 TEST(Vec3Test, Addition) {
   const Vec3 vector1{1.0, 2.0, 3.0};
   const Vec3 vector2{4.0, 5.0, 6.0};
