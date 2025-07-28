@@ -1,0 +1,43 @@
+#include <gtest/gtest.h>
+
+#include "model/Image.h"
+#include "model/SceneObject.h"
+
+class TestSceneObject final : public SceneObject {
+ public:
+  std::vector<Line> getProjectedLines() override { return {}; }
+  void render(Image&) override {}
+};
+
+TEST(SceneObjectTest, SetAndGetColor) {
+  TestSceneObject obj;
+  const Color c{1, 2, 3};
+  obj.setColor(c);
+  EXPECT_EQ(obj.getColor(), c);
+}
+
+TEST(SceneObjectTest, DefaultColor) {
+  const TestSceneObject obj;
+  constexpr Color defaultColor{};
+  EXPECT_EQ(obj.getColor(), defaultColor);
+}
+
+TEST(SceneObjectTest, DefaultConstructor) {
+  TestSceneObject obj;
+  EXPECT_NO_THROW(obj.getProjectedLines());
+  Image image;
+  EXPECT_NO_THROW(obj.render(image));
+}
+
+TEST(SceneObjectTest, Destructor) {
+  const TestSceneObject* obj = new TestSceneObject();
+  EXPECT_NO_THROW(delete obj);
+}
+
+TEST(SceneObjectTest, Inheritance) {
+  SceneObject* obj = new TestSceneObject();
+  EXPECT_NO_THROW(obj->getProjectedLines());
+  Image image;
+  EXPECT_NO_THROW(obj->render(image));
+  delete obj;
+}

@@ -21,6 +21,10 @@ struct Color {
     this->g = static_cast<uint8_t>(vec3.y);
     this->b = static_cast<uint8_t>(vec3.z);
   }
+
+  bool operator==(const Color& other) const {
+    return r == other.r && g == other.g && b == other.b;
+  }
 };
 
 #endif  // COLOR_H

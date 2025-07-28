@@ -30,6 +30,7 @@ set(test_sources
         tests/Vec3Test.cpp
         tests/ProjectorTest.cpp
         tests/MatrixTest.cpp
+        tests/SceneObjectTest.cpp
 )
 ############################################################
 # Add dependencies
