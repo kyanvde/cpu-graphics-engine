@@ -7,6 +7,27 @@
 
 using json = nlohmann::json;
 
+// Constants to reduce magic values
+constexpr char TYPE_KEY[] = "type";
+constexpr char LINE_DRAWING_TYPE[] = "LineDrawing";
+constexpr char LSYSTEM2D_TYPE[] = "LSystem2D";
+
+std::unique_ptr<SceneObject> JsonSceneParser::parseObject(
+    const nlohmann::json& objectJson) {
+  if (objectJson[TYPE_KEY] == LINE_DRAWING_TYPE) {
+    const LineDrawingParser lineDrawingParser;
+    return lineDrawingParser.parse(objectJson);
+  }
+
+  if (objectJson[TYPE_KEY] == LSYSTEM2D_TYPE) {
+    const LSystem2DParser lSystem2DParser;
+    return lSystem2DParser.parse(objectJson);
+  }
+
+  throw std::runtime_error("Unknown object type: " +
+                           objectJson[TYPE_KEY].get<std::string>());
+}
+
 Scene JsonSceneParser::parse(const std::string& sceneFile) {
   Scene scene;
 
@@ -34,14 +55,11 @@ Scene JsonSceneParser::parse(const std::string& sceneFile) {
   }
 
   for (const auto& objectJson : json["objects"]) {
-    if (objectJson["type"] == "LineDrawing") {
-      LineDrawingParser lineDrawingParser;
-      scene.addObject(lineDrawingParser.parse(objectJson));
-    } else if (objectJson["type"] == "LSystem2D") {
-      LSystem2DParser lSystem2DParser;
-      scene.addObject(lSystem2DParser.parse(objectJson));
-    }
+    scene.addObject(parseObject(objectJson));
   }
+
+ private:
+  std::unique_ptr<SceneObject> parseObject(const nlohmann::json& objectJson);
 
   return scene;
 }

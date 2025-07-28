@@ -6,6 +6,9 @@
 #include "io/parsers/SceneParser.h"
 
 class JsonSceneParser final : public SceneParser {
+  static std::unique_ptr<SceneObject> parseObject(
+      const nlohmann::json& objectJson);
+
  public:
   Scene parse(const std::string& sceneFile) override;
 
