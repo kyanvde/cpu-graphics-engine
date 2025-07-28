@@ -49,4 +49,4 @@ jobs:
         COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
       working-directory: ${{github.workspace}}/build
       run: |
-        ~/.local/bin/coveralls --exclude tests --exclude lib --gcov-options '\-lp'
+        ~/.local/bin/coveralls --include src --gcov-options '\-lp'
