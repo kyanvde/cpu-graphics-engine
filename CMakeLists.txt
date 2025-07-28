@@ -60,3 +60,6 @@ target_link_libraries(engine PRIVATE nlohmann_json::nlohmann_json)
 add_executable(engine_tests ${engine_sources} ${test_sources})
 target_include_directories(engine_tests PRIVATE ${CMAKE_SOURCE_DIR}/src)
 target_link_libraries(engine_tests PRIVATE nlohmann_json::nlohmann_json gtest_main)
+
+enable_testing()
+add_test(NAME EngineTests COMMAND engine_tests)
