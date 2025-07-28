@@ -219,6 +219,43 @@
           10
         ]
       ]
+    },
+    {
+      "type": "LSystem2D",
+      "color": [
+        0,
+        0,
+        255
+      ],
+      "transform": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": 1.0
+      },
+      "alphabet": [
+        "F"
+      ],
+      "draw": [
+        "F"
+      ],
+      "rules": [
+        [
+          "F",
+          "-F+F-F-F+F+FF-F+F+FF+F-F-FF+FF-FF+F+F-FF-F-F+FF-F-F+F+F-F+"
+        ]
+      ],
+      "initiator": "F",
+      "angle": 90,
+      "startingAngle": 0,
+      "iterations": 4
     }
   ]
 }

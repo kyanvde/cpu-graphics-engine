@@ -6,6 +6,9 @@
 #include "io/parsers/SceneParser.h"
 
 class JsonSceneParser final : public SceneParser {
+  static std::unique_ptr<SceneObject> parseObject(
+      const nlohmann::json& objectJson);
+
  public:
   Scene parse(const std::string& sceneFile) override;
 
@@ -13,6 +16,9 @@ class JsonSceneParser final : public SceneParser {
                                   const std::string& key);
   static Vec3 getVec3(const nlohmann::json& json, const std::string& key);
   static Vec3 getVec3(const nlohmann::json& array);
+  static float getFloat(const nlohmann::json& json, const std::string& key);
+  static std::string getRequiredString(const nlohmann::json& json,
+                                       const std::string& key);
 };
 
 #endif  // JSONSCENEPARSER_H

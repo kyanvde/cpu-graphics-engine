@@ -2,9 +2,31 @@
 
 #include <fstream>
 
+#include "objects/LSystem2DParser.h"
 #include "objects/LineDrawingParser.h"
 
 using json = nlohmann::json;
+
+// Constants to reduce magic values
+constexpr char TYPE_KEY[] = "type";
+constexpr char LINE_DRAWING_TYPE[] = "LineDrawing";
+constexpr char LSYSTEM2D_TYPE[] = "LSystem2D";
+
+std::unique_ptr<SceneObject> JsonSceneParser::parseObject(
+    const nlohmann::json& objectJson) {
+  if (objectJson[TYPE_KEY] == LINE_DRAWING_TYPE) {
+    const LineDrawingParser lineDrawingParser;
+    return lineDrawingParser.parse(objectJson);
+  }
+
+  if (objectJson[TYPE_KEY] == LSYSTEM2D_TYPE) {
+    const LSystem2DParser lSystem2DParser;
+    return lSystem2DParser.parse(objectJson);
+  }
+
+  throw std::runtime_error("Unknown object type: " +
+                           objectJson[TYPE_KEY].get<std::string>());
+}
 
 Scene JsonSceneParser::parse(const std::string& sceneFile) {
   Scene scene;
@@ -33,9 +55,11 @@ Scene JsonSceneParser::parse(const std::string& sceneFile) {
   }
 
   for (const auto& objectJson : json["objects"]) {
-    LineDrawingParser lineDrawingParser;
-    scene.addObject(lineDrawingParser.parse(objectJson));
+    scene.addObject(parseObject(objectJson));
   }
+
+ private:
+  std::unique_ptr<SceneObject> parseObject(const nlohmann::json& objectJson);
 
   return scene;
 }
@@ -84,4 +108,25 @@ Vec3 JsonSceneParser::getVec3(const nlohmann::json& array) {
   }
 
   return {array[0].get<float>(), array[1].get<float>(), array[2].get<float>()};
+}
+
+float JsonSceneParser::getFloat(const json& json, const std::string& key) {
+  if (!json.contains(key)) {
+    throw std::runtime_error("Missing key: " + key);
+  }
+  if (!json[key].is_number()) {
+    throw std::runtime_error("Field '" + key + "' must be a number.");
+  }
+  return json[key].get<float>();
+}
+
+std::string JsonSceneParser::getRequiredString(const json& json,
+                                               const std::string& key) {
+  if (!json.contains(key)) {
+    throw std::runtime_error("Missing key: " + key);
+  }
+  if (!json[key].is_string()) {
+    throw std::runtime_error("Field '" + key + "' must be a string.");
+  }
+  return json[key].get<std::string>();
 }
