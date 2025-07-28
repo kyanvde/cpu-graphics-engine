@@ -19,6 +19,7 @@ set(engine_sources
         src/io/writers/BMPWriter.cpp
         src/math/Projector.cpp
         src/model/objects/LineDrawing.cpp
+        src/model/objects/LSystem2D.cpp
         src/model/Image.cpp
         src/model/Scene.cpp
         src/engine.cpp
