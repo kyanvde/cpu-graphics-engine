@@ -1,0 +1,54 @@
+{
+  "maxImageSize": 768,
+  "backgroundColor": [
+    0,
+    0,
+    0
+  ],
+  "camera": {
+    "position": [
+      89,
+      0,
+      0
+    ]
+  },
+  "objects": [
+    {
+      "type": "LSystem2D",
+      "color": [
+        0,
+        0,
+        255
+      ],
+      "transform": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": 1.0
+      },
+      "alphabet": [
+        "F"
+      ],
+      "draw": [
+        "F"
+      ],
+      "rules": [
+        [
+          "F",
+          "FF++F++F+F++F-F"
+        ]
+      ],
+      "initiator": "F",
+      "angle": 60,
+      "startingAngle": 0,
+      "iterations": 7
+    }
+  ]
+}
