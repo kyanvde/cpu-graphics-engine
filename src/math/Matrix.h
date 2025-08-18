@@ -6,6 +6,8 @@
 #include <initializer_list>
 #include <type_traits>
 
+#include "MathUtils.h"
+
 // RxC matrix of type T
 template <typename T, std::size_t R, std::size_t C>
 struct Matrix {
@@ -76,6 +78,21 @@ struct Matrix {
     scaleMatrix.m[2][2] = scaleFactor;
 
     return scaleMatrix;
+  }
+
+  static Matrix<float, 3, 3> rotateX(const double angle) {
+    const double radAngle = MathUtils::degToRad(angle);
+    const double angleSin = std::sin(radAngle);
+    const double angleCos = std::cos(radAngle);
+
+    Matrix xRotateMatrix;
+    xRotateMatrix(0, 0) = 1;
+    xRotateMatrix(1, 1) = angleCos;
+    xRotateMatrix(1, 2) = angleSin;
+    xRotateMatrix(2, 1) = -angleSin;
+    xRotateMatrix(2, 2) = angleCos;
+
+    return xRotateMatrix;
   }
 };
 
