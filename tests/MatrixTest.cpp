@@ -70,3 +70,16 @@ TEST(MatrixTest, RotateY) {
   EXPECT_EQ(matrix(2, 1), 0);
   EXPECT_NEAR(matrix(2, 2), 0, 1e-6);
 }
+
+TEST(MatrixTest, RotateZ) {
+  Matrix matrix = Matrix<float, 3, 3>::rotateZ(90);
+  EXPECT_NEAR(matrix(0, 0), 0, 1e-6);
+  EXPECT_NEAR(matrix(0, 1), -1, 1e-6);
+  EXPECT_EQ(matrix(0, 2), 0);
+  EXPECT_NEAR(matrix(1, 0), 1, 1e-6);
+  EXPECT_NEAR(matrix(1, 1), 0, 1e-6);
+  EXPECT_EQ(matrix(1, 2), 0);
+  EXPECT_EQ(matrix(2, 0), 0);
+  EXPECT_EQ(matrix(2, 1), 0);
+  EXPECT_EQ(matrix(2, 2), 1);
+}

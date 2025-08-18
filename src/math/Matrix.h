@@ -109,6 +109,21 @@ struct Matrix {
 
     return yRotateMatrix;
   }
+
+  static Matrix<float, 3, 3> rotateZ(const double angle) {
+    const double radAngle = MathUtils::degToRad(angle);
+    const double angleSin = std::sin(radAngle);
+    const double angleCos = std::cos(radAngle);
+
+    Matrix zRotateMatrix;
+    zRotateMatrix(0, 0) = angleCos;
+    zRotateMatrix(0, 1) = -angleSin;
+    zRotateMatrix(1, 0) = angleSin;
+    zRotateMatrix(1, 1) = angleCos;
+    zRotateMatrix(2, 2) = 1;
+
+    return zRotateMatrix;
+  }
 };
 
 #endif  // MATRIX_H
