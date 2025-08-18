@@ -94,6 +94,21 @@ struct Matrix {
 
     return xRotateMatrix;
   }
+
+  static Matrix<float, 3, 3> rotateY(const double angle) {
+    const double radAngle = MathUtils::degToRad(angle);
+    const double angleSin = std::sin(radAngle);
+    const double angleCos = std::cos(radAngle);
+
+    Matrix yRotateMatrix;
+    yRotateMatrix(0, 0) = angleCos;
+    yRotateMatrix(0, 2) = angleSin;
+    yRotateMatrix(1, 1) = 1;
+    yRotateMatrix(2, 0) = -angleSin;
+    yRotateMatrix(2, 2) = angleCos;
+
+    return yRotateMatrix;
+  }
 };
 
 #endif  // MATRIX_H
