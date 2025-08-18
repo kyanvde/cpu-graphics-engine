@@ -31,3 +31,12 @@ TEST(MatrixTest, Multiplication) {
   EXPECT_EQ(c(1, 0), 139);
   EXPECT_EQ(c(1, 1), 154);
 }
+
+TEST(MatrixTest, Scale) {
+  Matrix matrix = Matrix<float, 3, 3>::scale(2);
+  EXPECT_EQ(matrix(0, 0), 2);
+  EXPECT_EQ(matrix(1, 1), 2);
+  EXPECT_EQ(matrix(2, 2), 2);
+  EXPECT_EQ(matrix(0, 1), 0);
+  EXPECT_EQ(matrix(1, 0), 0);
+}

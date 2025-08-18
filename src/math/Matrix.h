@@ -15,7 +15,7 @@ struct Matrix {
   // Constructors
 
   // zero-initialize
-  constexpr Matrix() : m{} {}
+  constexpr Matrix() = default;
 
   // from (nested) initializer list
   constexpr Matrix(std::initializer_list<std::initializer_list<T>> init) {
@@ -66,6 +66,16 @@ struct Matrix {
       }
     }
     return result;
+  }
+
+  // Premade matrices
+  static Matrix<float, 3, 3> scale(double scaleFactor) {
+    Matrix scaleMatrix = identity<>();
+    scaleMatrix.m[0][0] = scaleFactor;
+    scaleMatrix.m[1][1] = scaleFactor;
+    scaleMatrix.m[2][2] = scaleFactor;
+
+    return scaleMatrix;
   }
 };
 
