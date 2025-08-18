@@ -83,3 +83,16 @@ TEST(MatrixTest, RotateZ) {
   EXPECT_EQ(matrix(2, 1), 0);
   EXPECT_EQ(matrix(2, 2), 1);
 }
+
+TEST(MatrixTest, TranslationMatrixIsCorrect) {
+  constexpr double xTranslate = 3.5;
+  constexpr double yTranslate = -2.0;
+  constexpr double zTranslate = 7.1;
+
+  const auto result =
+      Matrix<float, 4, 4>::translate(xTranslate, yTranslate, zTranslate);
+
+  EXPECT_NEAR(result(0, 3), xTranslate, 1e-6);
+  EXPECT_NEAR(result(1, 3), yTranslate, 1e-6);
+  EXPECT_NEAR(result(2, 3), zTranslate, 1e-6);
+}

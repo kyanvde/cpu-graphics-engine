@@ -71,8 +71,18 @@ struct Matrix {
   }
 
   // Premade matrices
+  static Matrix<float, 4, 4> translate(const double xTranslate,
+                                       const double yTranslate,
+                                       const double zTranslate) {
+    Matrix translationMatrix = identity<>();
+    translationMatrix.m[0][3] = xTranslate;
+    translationMatrix.m[1][3] = yTranslate;
+    translationMatrix.m[2][3] = zTranslate;
+    return translationMatrix;
+  }
+
   static Matrix<float, 3, 3> scale(double scaleFactor) {
-    Matrix scaleMatrix = identity<>();
+    Matrix scaleMatrix;
     scaleMatrix.m[0][0] = scaleFactor;
     scaleMatrix.m[1][1] = scaleFactor;
     scaleMatrix.m[2][2] = scaleFactor;
